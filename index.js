@@ -7,9 +7,9 @@ const app = express();
 const httpServer = http.createServer(app); // Create an HTTP server instance
 const io = socketIo(httpServer, {
     cors: {
-        origin: '*', // Allow all origins for testing purposes
-        methods: ['GET', 'POST'],
-        allowedHeaders: ['Content-Type'],
+        origin: "*", // Allow all origins for testing purposes
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type"],
         credentials: true
     }
 });
