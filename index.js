@@ -7,24 +7,26 @@ const app = express();
 const httpServer = http.createServer(app); // Create an HTTP server instance
 const io = socketIo(httpServer, {
     cors: {
-        origin: "*", // Allow all origins for testing purposes
-        methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type"],
+        origin: '*', // Allow all origins for testing purposes
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type'],
         credentials: true
     }
 });
 
 app.use(cors()); // Use the cors middleware
-
+let currentOnline = 0
 io.on('connection', (socket) => {
     console.log('A user connected');
-
+    currentOnline++;
     socket.on('chat message', (msg) => {
         io.emit('chat message', msg);
         console.log(msg);
     });
+    socket.on('current online',currentOnline);
 
     socket.on('disconnect', () => {
+        currentOnline--;
         console.log('User disconnected');
     });
 });
