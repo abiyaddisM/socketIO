@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
         console.log(msg);
     });
-    socket.on('current online',currentOnline);
+    io.emit('current online',currentOnline)
 
     socket.on('disconnect', () => {
         currentOnline--;
